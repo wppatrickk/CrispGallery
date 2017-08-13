@@ -17,7 +17,7 @@ Free responsive WordPress gallery plugin where you can display images in a grid 
 * Easily add, upload or delete images from the gallery.
 * Set custom captions to images.
 * Custom font styling of captions.
-* Fancybox enabled for larger view of images.
+* Lightbox enabled for larger view of images.
 * 100% responsive on all devices.
 
 <h2>Installation</h2>
