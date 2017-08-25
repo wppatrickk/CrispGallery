@@ -54,8 +54,12 @@ function crispgallery_shortcode($atts) {
    	if($gallery_posts->have_posts()) :
    		while($gallery_posts->have_posts()) : 
 	   		$gallery_posts->the_post();
-	   		$ids = get_post_meta($postid, 'vdw_gallery_id', true); ?>
-			<div class="crispgallery">
+	   		$ids = get_post_meta($postid, 'vdw_gallery_id', true);
+	   		$crispgallery_display = get_post_meta(get_the_ID(), 'crispgallery_display', true);
+			if (!$crispgallery_display) {
+				$crispgallery_display = 'square';
+			} ?>
+			<div id="crispgallery-<?php echo $postid; ?>" class="crispgallery <?php echo $crispgallery_display; ?>">
 				<?php
 				$crispgallery_border = get_post_meta(get_the_ID(), 'crispgallery_border', true);
 				$crispgallery_border_color = get_post_meta(get_the_ID(), 'crispgallery_border_color', true);
@@ -64,7 +68,7 @@ function crispgallery_shortcode($atts) {
 				$crispgallery_caption_fst = get_post_meta(get_the_ID(), 'crispgallery_caption_font_style', true);
 				$crispgallery_caption_fc = get_post_meta(get_the_ID(), 'crispgallery_caption_font_color', true); ?>
 				<style type="text/css">
-					body .crispgallery ul li p, body .crispgallery ul li p:last-child {
+					body #crispgallery-<?php echo $postid; ?> ul li p, body #crispgallery-<?php echo $postid; ?> ul li p:last-child {
 						font-family: <?php echo $crispgallery_caption_font; ?>;
 						font-size: <?php echo $crispgallery_caption_fsize; ?>;
 						font-style: <?php echo $crispgallery_caption_fst; ?>;
@@ -73,7 +77,7 @@ function crispgallery_shortcode($atts) {
 					}
 
 					<?php if ($crispgallery_border_color) { ?>
-					body .crispgallery-border a {
+					body #crispgallery-<?php echo $postid; ?> .crispgallery-border a {
 						border-color: <?php echo $crispgallery_border_color; ?>;
 					}
 					<?php } ?>

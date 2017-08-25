@@ -20,6 +20,21 @@
 	min-width: 150px;
 }
 
+.crispgallery-display {
+	margin-bottom: 24px;
+}
+
+#crispgallery-settings .crispgallery-display fieldset {
+	display: inline-block;
+	margin-bottom: 0;
+	position: relative;
+	top: 1px;
+}
+
+.crispgallery-display .crispgallery-display-wrap {
+	display: inline-block;
+}
+
 #crispgallery-settings input[type='text'], #crispgallery-settings select {
 	min-width: 150px;
 }

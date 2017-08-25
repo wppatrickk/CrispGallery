@@ -23,6 +23,7 @@ function crispgallery_cb($post) {
 function crispgallery_settings($post) {
 	wp_nonce_field( 'crispgallery_nonce_set', 'crispgallery_nonce' );
 	$crispgallery_cols = get_post_meta($post->ID, 'crispgallery_cols', true);
+	$crispgallery_display = get_post_meta($post->ID, 'crispgallery_display', true);
 	$crispgallery_border = get_post_meta($post->ID, 'crispgallery_border', true);
 	$crispgallery_border_color = get_post_meta($post->ID, 'crispgallery_border_color', true);
 	$crispgallery_font = get_post_meta($post->ID, 'crispgallery_caption_font', true);
@@ -44,6 +45,31 @@ function crispgallery_settings($post) {
 					<option value="6" <?php selected( $crispgallery_cols, '6' ); ?>>6</option>
 				</select>
 			</fieldset>
+
+			<div class="crispgallery-display">
+				<label>Display Type</label>
+				<fieldset>
+					<div class="crispgallery-display-wrap">
+						<legend class="screen-reader-text"><span><?php esc_attr_e( 'Square', 'crispgallery' ); ?></span></legend>
+						<label for="crispgallery-display">
+							<input name="crispgallery_display" type="radio" value="square" <?php checked( $crispgallery_display, 'square' ); ?> <?php if (!$crispgallery_display) { ?>checked<?php } ?> />
+							<span><?php esc_attr_e( 'Square', 'crispgallery' ); ?></span>
+						</label>
+					</div>
+
+					<div class="crispgallery-display-wrap">
+						<legend class="screen-reader-text"><span><?php esc_attr_e( 'Rectangle', 'crispgallery' ); ?></span></legend>
+						<label for="crispgallery-display">
+							<input name="crispgallery_display" type="radio" value="rectangle" <?php checked( $crispgallery_display, 'rectangle' ); ?> />
+							<span><?php esc_attr_e( 'Rectangle', 'crispgallery' ); ?></span>
+						</label>
+					</div>
+
+					<div class="clear"></div>
+				</fieldset>
+
+				<div class="clear"></div>
+			</div>
 
 			<fieldset>
 				<legend class="screen-reader-text"><span><?php esc_attr_e( 'Show Border', 'crispgallery' ); ?></span></legend>
@@ -156,6 +182,8 @@ function crispgallery_save_gallery($post_id){
 		if( $_POST['crispgallery_cols'] ) {
 			update_post_meta( $post_id, 'crispgallery_cols', esc_attr( $_POST['crispgallery_cols'] ) );
 		}
+
+		update_post_meta( $post_id, 'crispgallery_display', $_POST['crispgallery_display'] );
 
 		$crispgallery_border = isset( $_POST['crispgallery_border'] ) && $_POST['crispgallery_border'] ? 'on' : 'off';
 		update_post_meta( $post_id, 'crispgallery_border', $crispgallery_border );

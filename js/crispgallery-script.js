@@ -31,12 +31,30 @@ var currentTallest = 0,
 }
 
 jQuery(document).ready(function() {
-	var imgWidth = jQuery('.crispgallery-image').width();
-	jQuery('.crispgallery-image').height(imgWidth);
+	jQuery('.square').each(function() {
+		var imgWidth = jQuery(this).find('.crispgallery-image').width();
+		jQuery(this).find('.crispgallery-image').height(imgWidth);
+	});
 
 	jQuery(window).on('resize', function(){
-		var imgWidth = jQuery('.crispgallery-image').width();
-		jQuery('.crispgallery-image').height(imgWidth);
+		jQuery('.square').each(function() {
+			var imgWidth = jQuery(this).find('.crispgallery-image').width();
+			jQuery(this).find('.crispgallery-image').height(imgWidth);
+		});
+	});
+
+	jQuery('.rectangle').each(function() {
+		var imgWidth = jQuery(this).find('.crispgallery-image').width();
+		var imgWidth = imgWidth * 2/3;
+		jQuery(this).find('.crispgallery-image').height(imgWidth);
+	});
+
+	jQuery(window).on('resize', function(){
+		jQuery('.rectangle').each(function() {
+			var imgWidth = jQuery(this).find('.crispgallery-image').width();
+			var imgWidth = imgWidth * 2/3;
+			jQuery(this).find('.crispgallery-image').height(imgWidth);
+		});
 	});
 });
 
